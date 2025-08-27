@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffd700">
+    <meta name="description" content="一个炫酷的月薪收入计算器应用，可以帮助您计算每一秒钟您能赚多少钱！">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../images/icon-192x192.png">
+    <title>月薪收入计算器 - 每秒收入计算应用</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>💰 月薪收入计算器</h1>
+        
+        <div class="calculator-card">
+            <div class="input-section">
+                <label for="salaryInput">输入您的月薪 (元):</label>
+                <input type="number" id="salaryInput" placeholder="请输入月薪金额" min="0" step="100">
+                <div class="button-group">
+                    <button id="calculateBtn" class="calculate-btn">
+                        <i class="fas fa-calculator"></i> 开始计算
+                    </button>
+                    <button id="resetBtn" class="reset-btn">
+                        <i class="fas fa-redo"></i> 重置
+                    </button>
+                </div>
+            </div>
+            
+            <div class="result-section">
+                <div class="result-item">
+                    <span class="result-label">您的月薪:</span>
+                    <span id="monthlySalary" class="result-value gold-text">¥0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">每日收入:</span>
+                    <span id="dailySalary" class="result-value gold-text">¥0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">每小时收入:</span>
+                    <span id="hourlySalary" class="result-value gold-text">¥0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">每分钟收入:</span>
+                    <span id="minuteSalary" class="result-value gold-text">¥0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">每秒收入:</span>
+                    <span id="secondSalary" class="result-value gold-text">
+                        <span class="coin-animation">¥0</span>
+                    </span>
+                </div>
+                <div class="result-item highlight real-time-income">
+                    <span class="result-label">累计收入:</span>
+                    <span id="accumulatedIncome" class="result-value gold-text large-text">¥0</span>
+                </div>
+            </div>
+            
+            <div class="progress-section">
+                <div class="progress-bar-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+                <div class="counter-container">
+                    <span id="counterDisplay" class="counter">0</span>
+                    <span class="counter-label">秒</span>
+                </div>
+            </div>
+            
+            <div class="visualization-section">
+                <div class="coin-container">
+                    <!-- 金币动画将在这里动态生成 -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>💡 使用提示</h3>
+            <ul>
+                <li>输入您的月薪，点击"开始计算"按钮或按下Enter键</li>
+                <li>实时查看您的累计收入增长，感受每一秒的价值</li>
+                <li>进度条显示距离下一个整元的进度</li>
+                <li>当累计收入达到整元时，会触发金币动画和特殊效果</li>
+                <li>点击"暂停"按钮可以暂停计算，点击"继续"恢复计算</li>
+                <li>点击"重置"按钮可以重新开始计算</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 音频元素 -->
+    <audio id="coinSound" preload="auto">
+        <source src="coin_sound.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="script.js"></script>
+    <script>
+      // 注册Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('../service-worker.js').then(function(registration) {
+            console.log('ServiceWorker 注册成功，作用域:', registration.scope);
+          }).catch(function(error) {
+            console.log('ServiceWorker 注册失败:', error);
+          });
+        });
+      }
+    </script>
+</body>
+</html>
